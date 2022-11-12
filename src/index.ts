@@ -6,6 +6,7 @@ export * from './elements';
 export * from './md';
 export * from './surfaces';
 export * from './utilities';
+export * from './custom'
 export type {
   SlackDto,
   SlackViewDto,

@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "lib": [
-      "es2016",
-      "es2017",
-      "es2019.array"
+      // "es2016",
+      // "es2017",
+      // "es2019.array",
+      "es2021"
     ],
     "target": "ES2018",
     "module": "commonjs",
@@ -13,7 +14,5 @@
     "stripInternal": true,
     "moduleResolution": "node"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

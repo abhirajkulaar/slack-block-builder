@@ -1,9 +1,9 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable max-len */
 
-import { Builder } from '../lib';
-import { SlackDto, SlackBlockDto } from '../dto';
-
+import { Builder } from "../lib";
+import { SlackDto, SlackBlockDto } from "../dto";
+import { jsonToHTML } from "../../custom/jsonToHTML";
 export abstract class BuildToJSON extends Builder {
   /**
    * @description Builds the view and returns it as a Slack API-compatible JSON string.
@@ -12,7 +12,7 @@ export abstract class BuildToJSON extends Builder {
   public buildToJSON(): string {
     const result = this.build();
 
-    return JSON.stringify(result);
+    return JSON.stringify(result, null, 2);
   }
 }
 
@@ -23,6 +23,16 @@ export abstract class BuildToObject<T> extends Builder {
 
   public buildToObject(): Readonly<T> {
     return this.build();
+  }
+}
+
+export abstract class BuildToHTML extends Builder {
+  /**
+   * @description Builds the view and returns it as a Slack API-compatible JSON string.
+   */
+  public getHTML(): string {
+    const result = this.build();
+    return jsonToHTML(result);
   }
 }
 
@@ -73,12 +83,18 @@ export abstract class GetPreviewUrl extends Builder {
   public getPreviewUrl(): string {
     const result = this.build();
 
-    const baseUri = 'https://app.slack.com/block-kit-builder/#';
+    const baseUri = "https://app.slack.com/block-kit-builder/#";
     const stringifiedBlocks = result.type
       ? JSON.stringify(result)
-      : JSON.stringify({ blocks: result.blocks, attachments: result.attachments });
+      : JSON.stringify({
+          blocks: result.blocks,
+          attachments: result.attachments,
+        });
 
-    return encodeURI(`${baseUri}${stringifiedBlocks}`).replace(/[!'()*]/g, escape);
+    return encodeURI(`${baseUri}${stringifiedBlocks}`).replace(
+      /[!'()*]/g,
+      escape
+    );
   }
 }
 

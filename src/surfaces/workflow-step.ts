@@ -12,6 +12,7 @@ import {
   GetBlocks,
   GetPreviewUrl,
   PrintPreviewUrl,
+  BuildToHTML
 } from '../internal/methods';
 
 import type { SlackBlockDto } from '../internal/dto';
@@ -27,6 +28,7 @@ export interface WorkflowStepBuilder extends Blocks<ViewBlockBuilder>,
   PrivateMetaData,
   SubmitDisabled,
   BuildToJSON,
+  BuildToHTML,
   BuildToObject<SlackWorkflowStepDto>,
   GetBlocks,
   GetPreviewUrl,
@@ -58,6 +60,7 @@ applyMixins(WorkflowStepBuilder, [
   PrivateMetaData,
   SubmitDisabled,
   BuildToJSON,
+  BuildToHTML,
   BuildToObject,
   GetBlocks,
   GetPreviewUrl,
